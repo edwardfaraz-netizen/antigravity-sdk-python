@@ -40,8 +40,8 @@ import logging
 
 from google.antigravity.agent import Agent
 from google.antigravity.connections.local.local_connection_config import LocalAgentConfig
-from google.antigravity.triggers import helpers
-from google.antigravity.triggers import triggers as triggers_module
+from google.antigravity.triggers.helpers import every
+from google.antigravity.triggers.triggers import TriggerContext
 
 _PASS_TOKEN = "[PASS]"
 _MAX_ROUNDS = 4
@@ -69,7 +69,7 @@ async def pass_turn() -> str:
 # ---------------------------------------------------------------------------
 
 
-async def _moderator_nudge(ctx: triggers_module.TriggerContext) -> None:
+async def _moderator_nudge(ctx: TriggerContext) -> None:
   """Nudges the agent to wrap up after a delay."""
   await ctx.send(
       "The discussion is wrapping up. Make your final point concisely.",
@@ -213,7 +213,7 @@ async def main() -> None:
     config = LocalAgentConfig(
         system_instructions=instructions,
         tools=[pass_turn],
-        triggers=[helpers.every(60, _moderator_nudge)],
+        triggers=[every(60, _moderator_nudge)],
     )
     agents[name] = Agent(config)
 

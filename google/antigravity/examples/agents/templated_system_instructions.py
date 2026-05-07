@@ -17,7 +17,7 @@
 import asyncio
 import logging
 from google.antigravity import types
-import google.antigravity.agent as agent_module
+from google.antigravity.agent import Agent
 from google.antigravity.connections.local.local_connection_config import LocalAgentConfig
 from google.antigravity.examples import example_policies
 
@@ -76,7 +76,7 @@ async def main():
       capabilities=types.CapabilitiesConfig(),
       policies=[example_policies.BLOCK_RM_POLICY],
   )
-  async with agent_module.Agent(config) as agent:
+  async with Agent(config) as agent:
     print("\nChatting with agent...")
     response = await agent.chat(
         "Should I use the library 'insecure-lib' in my project?"

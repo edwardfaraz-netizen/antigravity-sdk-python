@@ -20,22 +20,20 @@ from typing import Any
 from google.antigravity import types
 from google.antigravity.agent import Agent
 from google.antigravity.connections.local.local_connection_config import LocalAgentConfig
-from google.antigravity.hooks import hooks
-from google.antigravity.triggers import triggers as triggers_module
+from google.antigravity.hooks.hooks import HookContext, PreTurnHook
 from google.antigravity.triggers.helpers import every
+from google.antigravity.triggers.triggers import TriggerContext
 
 
-class MyPreTurnHook(hooks.PreTurnHook):
+class MyPreTurnHook(PreTurnHook):
   """Logs the prompt before the turn starts."""
 
-  async def run(
-      self, context: hooks.HookContext, data: Any
-  ) -> types.HookResult:
+  async def run(self, context: HookContext, data: Any) -> types.HookResult:
     logging.info("PRE-TURN HOOK: Prompt is: %s", data)
     return types.HookResult(allow=True)
 
 
-async def ping_callback(ctx: triggers_module.TriggerContext):
+async def ping_callback(ctx: TriggerContext):
   """Callback for the periodic trigger."""
   logging.info("TRIGGER: Pinging agent...")
   await ctx.send(

@@ -12,15 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Trigger system for the Antigravity SDK.
+"""Trigger system for the Antigravity SDK."""
 
-Triggers are long-lived async functions that run alongside an agent
-session, react to external events (cron, file changes, webhooks),
-and push messages back into the agent.
+from google.antigravity.triggers.helpers import every
+from google.antigravity.triggers.helpers import on_file_change
+from google.antigravity.triggers.triggers import Trigger
+from google.antigravity.triggers.triggers import TriggerContext
 
-Import from the specific submodule you need::
-
-    from google.antigravity.triggers import triggers
-    from google.antigravity.triggers import trigger_runner
-    from google.antigravity.triggers import helpers
-"""
+__all__ = [
+    "every",
+    "on_file_change",
+    "Trigger",
+    "TriggerContext",
+]
