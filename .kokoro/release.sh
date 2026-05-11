@@ -86,6 +86,7 @@ mkdir -p "${DIST_DIR}"
 # --- Platform definitions ---
 declare -A PLATFORM_TAGS=(
   ["linux-x86_64"]="manylinux_2_17_x86_64"
+  ["linux-arm64"]="manylinux_2_17_aarch64"
   ["darwin-arm64"]="macosx_11_0_arm64"
 )
 
@@ -97,6 +98,7 @@ BINARIES_DIR=".kokoro/binaries"
 MPM_DIR="${KOKORO_ARTIFACTS_DIR:-}/mpm"
 declare -A MPM_DIRS=(
   ["linux-x86_64"]="localharness_linux_x86_64"
+  ["linux-arm64"]="localharness_linux_arm64"
   ["darwin-arm64"]="localharness_darwin_arm64"
 )
 
