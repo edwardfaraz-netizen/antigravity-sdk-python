@@ -51,6 +51,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # --- Determine project root ---
 if [[ -n "${KOKORO_ARTIFACTS_DIR}" ]]; then
   cd "${KOKORO_ARTIFACTS_DIR}/git/antigravity-sdk-py"
+  # Avoid fatal: detected dubious ownership errors in the Kokoro RBE sandbox environment
+  git config --global --add safe.directory "$(pwd)"
 fi
 
 # If a specific GoB commit was requested (via GOB_COMMIT build param),
